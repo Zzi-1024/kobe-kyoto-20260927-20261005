@@ -7,8 +7,8 @@
    格式範例：
    https://docs.google.com/spreadsheets/d/e/XXXX/pub?gid=0&single=true&output=csv
    ============================================================ */
-const META_CSV_URL     = "在這裡貼上 meta 分頁的發布 CSV 網址";
-const SCHEDULE_CSV_URL = "在這裡貼上 schedule 分頁的發布 CSV 網址";
+const META_CSV_URL     = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3vflXzFsxsdLDzObMSTt86Ci-nan0KjZjtnGa4QYDLPhD-8OJqg9DyzpH3KbzwQQucBXA7D2p9RMS/pub?gid=0&single=true&output=csv";
+const SCHEDULE_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3vflXzFsxsdLDzObMSTt86Ci-nan0KjZjtnGa4QYDLPhD-8OJqg9DyzpH3KbzwQQucBXA7D2p9RMS/pub?gid=469937186&single=true&output=csv";
 
 /* ---------- 小工具 ---------- */
 const esc = s => (s == null ? "" : String(s)).replace(/[&<>"]/g, c =>
