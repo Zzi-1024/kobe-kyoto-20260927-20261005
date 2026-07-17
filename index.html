@@ -90,6 +90,22 @@ section{padding:3.2rem 0;border-bottom:1px solid var(--line)}
 .state{padding:2rem 0;font-family:"DM Mono",monospace;font-size:.85rem;color:var(--muted)}
 .state.err{color:#b0392b}
 
+.embed-wrap{position:relative;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--washi)}
+.embed-wrap iframe{width:100%;height:520px;border:0;display:block;background:#fff}
+.embed-edit{position:absolute;top:.7rem;right:.7rem;font-family:"DM Mono",monospace;font-size:.7rem;background:var(--sumi);color:var(--paper);padding:.35rem .7rem;border-radius:4px;text-decoration:none}
+.embed-edit:hover{background:var(--moss)}
+
+/* 預訂清單 */
+.ck-group{margin-bottom:1.4rem}
+.ck-group h3{font-family:"Noto Serif TC",serif;font-weight:700;font-size:1.02rem;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
+.ck-dot{width:.7rem;height:.7rem;border-radius:50%;display:inline-block;flex-shrink:0}
+.ck{display:flex;align-items:flex-start;gap:.7rem;padding:.65rem .85rem;border:1px solid var(--line);border-radius:5px;background:var(--washi);margin-bottom:.5rem;cursor:pointer}
+.ck input{margin-top:.28rem;width:1.05rem;height:1.05rem;accent-color:var(--moss);flex-shrink:0;cursor:pointer}
+.ck .txt{font-size:.9rem}
+.ck .txt .when{font-family:"DM Mono",monospace;font-size:.66rem;color:var(--ochre);letter-spacing:.05em;margin-left:.3rem}
+.ck .txt .sub{display:block;color:var(--sumi-soft);font-size:.82rem;margin-top:.15rem}
+.ck input:checked ~ .txt{opacity:.5;text-decoration:line-through}
+
 footer{padding:2.4rem 0 3.5rem;font-family:"DM Mono",monospace;font-size:.72rem;color:var(--muted)}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
 
@@ -101,7 +117,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
 
 <nav><div class="inner">
   <span class="brand">神戶・京都 ⁄ 9日8夜</span>
-  <a href="#d1">1</a><a href="#d2">2</a><a href="#d3">3</a><a href="#d4">4</a><a href="#d5">5</a><a href="#d6">6</a><a href="#d7">7</a><a href="#d8">8</a><a href="#d9">9</a>
+  <a href="#d1">1</a><a href="#d2">2</a><a href="#d3">3</a><a href="#d4">4</a><a href="#d5">5</a><a href="#d6">6</a><a href="#d7">7</a><a href="#d8">8</a><a href="#d9">9</a><a href="#resv">預訂</a><a href="#cost-embed">費用</a>
 </div></nav>
 
 <header class="hero"><div class="wrap" id="hero"></div></header>
@@ -111,6 +127,25 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
   <p class="lead">資料從Google表單同步。<span class="mini fix">班次</span> 固定時刻　<span class="mini resv">預約</span> 需事前預約　<span class="mini free"> 免費 </span> 無須額外費用 </p>
   <p>晚餐留白欄位以斜紋標示</p>
   <div id="days"><div class="state" id="state">讀取行程資料中…</div></div>
+</div></section>
+
+<!-- /02 預訂・確認清單 -->
+<section><div class="wrap">
+  <div class="sec-head"><span class="no">/ 02</span><h2>預訂・確認清單</h2></div>
+  <p class="lead">依行動時間排序。</p>
+  <div id="resv"><div class="state">讀取預訂清單中…</div></div>
+</div></section>
+
+<!-- /03 費用估算 -->
+<section><div class="wrap">
+  <div class="sec-head"><span class="no">/ 03</span><h2>費用估算（單人）</h2></div>
+  <p class="lead">下表直接嵌入 Google Sheet，可即時檢視；登入且有編輯權時，點右上角可切換到試算表修改。</p>
+  <div class="embed-wrap">
+    <iframe id="cost-embed" title="費用估算" loading="lazy"
+      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR3vflXzFsxsdLDzObMSTt86Ci-nan0KjZjtnGa4QYDLPhD-8OJqg9DyzpH3KbzwQQucBXA7D2p9RMS/pubhtml?gid=2094658140&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+    <a class="embed-edit" target="_blank" rel="noopener"
+      href="貼上試算表的 edit 網址（可加 #gid=costs的gid）">在 Google Sheet 編輯 ↗</a>
+  </div>
 </div></section>
 
 <footer><div class="wrap">
