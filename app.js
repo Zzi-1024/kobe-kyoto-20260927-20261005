@@ -10,6 +10,7 @@
 const META_CSV_URL     = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3vflXzFsxsdLDzObMSTt86Ci-nan0KjZjtnGa4QYDLPhD-8OJqg9DyzpH3KbzwQQucBXA7D2p9RMS/pub?gid=0&single=true&output=csv";
 const SCHEDULE_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3vflXzFsxsdLDzObMSTt86Ci-nan0KjZjtnGa4QYDLPhD-8OJqg9DyzpH3KbzwQQucBXA7D2p9RMS/pub?gid=469937186&single=true&output=csv";
 const SITE_CSV_URL     = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3vflXzFsxsdLDzObMSTt86Ci-nan0KjZjtnGa4QYDLPhD-8OJqg9DyzpH3KbzwQQucBXA7D2p9RMS/pub?gid=49395692&single=true&output=csv";
+const RESV_CSV_URL     = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3vflXzFsxsdLDzObMSTt86Ci-nan0KjZjtnGa4QYDLPhD-8OJqg9DyzpH3KbzwQQucBXA7D2p9RMS/pub?gid=629136767&single=true&output=csv";
 
 /* ---------- 小工具 ---------- */
 const esc = s => (s == null ? "" : String(s)).replace(/[&<>"]/g, c =>
@@ -129,14 +130,50 @@ function renderHero(rows) {
     <div class="facts">${facts}</div>`;
 }
 
+function renderResv(rows) {
+  const host = document.getElementById("resv");
+  if (!host) return;
+
+  // 依 group 分組，保留出現順序
+  const groups = [];
+  const map = {};
+  rows.forEach(r => {
+    if (!r.id) return;
+    if (!map[r.group]) { map[r.group] = { name: r.group, color: r.group_color, items: [] }; groups.push(map[r.group]); }
+    map[r.group].items.push(r);
+  });
+
+  host.innerHTML = groups.map(g => `
+    <div class="ck-group">
+      <h3><span class="ck-dot" style="background:${esc(g.color) || "#888"}"></span>${esc(g.name)}</h3>
+      ${g.items.map(it => {
+        const checked = String(it.done).trim().toUpperCase() === "TRUE";
+        const when = it.when ? `<span class="when">${esc(it.when)}</span>` : "";
+        const sub  = it.sub ? `<span class="sub">${esc(it.sub)}</span>` : "";
+        return `<label class="ck">
+          <input type="checkbox" class="chk" id="${esc(it.id)}" ${checked ? "checked" : ""}>
+          <span class="txt"><b>${esc(it.title)}</b>${when}${sub}</span>
+        </label>`;
+      }).join("")}
+    </div>`).join("");
+
+  // 勾選存本機（之後可換成 GAS 寫回）
+  host.querySelectorAll(".chk").forEach(cb => {
+    const k = "resv_" + cb.id;
+    try { const v = localStorage.getItem(k); if (v !== null) cb.checked = v === "1"; } catch (e) {}
+    cb.addEventListener("change", () => { try { localStorage.setItem(k, cb.checked ? "1" : "0"); } catch (e) {} });
+  });
+}
+
 /* ---------- 主流程 ---------- */
 async function init() {
   const host = document.getElementById("days");
   try {
-    const [site, meta, sched] = await Promise.all([
-     loadCSV(SITE_CSV_URL), loadCSV(META_CSV_URL), loadCSV(SCHEDULE_CSV_URL)
-   ]);
-   renderHero(site);
+    const [site, meta, sched, resv] = await Promise.all([
+       loadCSV(SITE_CSV_URL), loadCSV(META_CSV_URL), loadCSV(SCHEDULE_CSV_URL), loadCSV(RESV_CSV_URL)
+    ]);
+    renderHero(site);
+    renderResv(resv);
     // 依 day 分組 schedule，並依 seq 排序
     const byDay = {};
     sched.forEach(it => {
