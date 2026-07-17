@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>神戶・京都 9日8夜 深度獨旅｜行程手帖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sumi:#1e2621; --sumi-soft:#33403a;
+  --washi:#e9e6dc; --washi-deep:#ddd8ca; --paper:#f4f1e8;
+  --moss:#4f6340; --moss-deep:#3a4a2f;
+  --ai:#2f4a58; --ochre:#b07d1e; --ochre-soft:#f3e7c9;
+  --line:#c8c2b0; --muted:#6f7268;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--sumi);font-family:"Noto Sans TC",sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+::selection{background:var(--moss);color:var(--paper)}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(244,241,232,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .inner{max-width:1040px;margin:0 auto;padding:.55rem 1.2rem;display:flex;gap:.12rem;align-items:center;flex-wrap:wrap;font-family:"DM Mono",monospace;font-size:.72rem}
+nav .brand{font-family:"Noto Serif TC",serif;font-weight:700;letter-spacing:.03em;margin-right:auto;font-size:.85rem}
+nav a{color:var(--sumi-soft);text-decoration:none;padding:.2rem .48rem;border-radius:3px;transition:background .2s,color .2s}
+nav a:hover{background:var(--moss);color:var(--paper)}
+
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.2rem}
+
+header.hero{padding:4.2rem 0 2.8rem;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:"DM Mono",monospace;font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;color:var(--moss);margin-bottom:1.3rem}
+.hero h1{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(2.3rem,6.5vw,4rem);line-height:1.08;letter-spacing:.02em}
+.hero h1 .sub{display:block;font-size:.4em;font-weight:500;color:var(--sumi-soft);margin-top:.7rem;letter-spacing:.12em}
+.route-line{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem;font-family:"DM Mono",monospace;font-size:.8rem;color:var(--sumi-soft);margin-top:1.8rem}
+.route-line b{font-weight:500;color:var(--sumi)} .route-line .arw{color:var(--moss)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:2.4rem}
+.fact{background:var(--paper);padding:.95rem 1.05rem}
+.fact .k{font-family:"DM Mono",monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fact .v{font-family:"Noto Serif TC",serif;font-weight:700;font-size:1.02rem;margin-top:.2rem}
+.fact .v small{font-weight:400;font-size:.78rem;color:var(--sumi-soft);font-family:"Noto Sans TC"}
+
+section{padding:3.2rem 0;border-bottom:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.6rem}
+.sec-head .no{font-family:"DM Mono",monospace;font-size:.8rem;color:var(--moss);letter-spacing:.1em}
+.sec-head h2{font-family:"Noto Serif TC",serif;font-weight:700;font-size:1.6rem;letter-spacing:.03em}
+.lead{max-width:66ch;color:var(--sumi-soft);margin-bottom:1.4rem;font-size:.95rem}
+
+.day{padding-top:2.8rem}
+.day:first-of-type{padding-top:0}
+.day-head{display:flex;align-items:flex-start;gap:1.1rem;margin-bottom:1rem;padding-bottom:.9rem;border-bottom:2px solid var(--sumi)}
+.day-no{font-family:"Noto Serif TC",serif;font-weight:900;font-size:2.5rem;line-height:.85;color:var(--moss)}
+.day-meta .d{font-family:"DM Mono",monospace;font-size:.74rem;letter-spacing:.12em;color:var(--muted)}
+.day-meta h3{font-family:"Noto Serif TC",serif;font-weight:700;font-size:1.22rem;margin-top:.12rem;letter-spacing:.02em}
+.day-tags{margin-left:auto;display:flex;gap:.35rem;flex-wrap:wrap;padding-top:.35rem}
+.pill{font-family:"DM Mono",monospace;font-size:.62rem;letter-spacing:.05em;color:var(--sumi-soft);border:1px solid var(--line);border-radius:20px;padding:.12rem .55rem;white-space:nowrap}
+
+.tt{margin:.3rem 0 0}
+.tt-row{display:grid;grid-template-columns:78px 20px 1fr;gap:.15rem;align-items:start}
+.tt-time{font-family:"DM Mono",monospace;font-size:.75rem;color:var(--sumi-soft);text-align:right;padding:.12rem .3rem 0 0}
+.tt-rail{position:relative;display:flex;justify-content:center}
+.tt-rail::before{content:"";position:absolute;top:0;bottom:0;width:2px;background:var(--line)}
+.tt-row:first-child .tt-rail::before{top:.5rem}
+.tt-row:last-child .tt-rail::before{bottom:calc(100% - .5rem)}
+.dot{position:relative;z-index:2;width:10px;height:10px;border-radius:50%;margin-top:.32rem;background:var(--paper);border:2px solid var(--moss)}
+.dot.spot{background:var(--moss)} .dot.hub{background:var(--sumi);border-color:var(--sumi);width:12px;height:12px}
+.tt-body{padding:0 0 .85rem .45rem}
+.tt-body .place{font-family:"Noto Serif TC",serif;font-weight:700;font-size:.98rem}
+.tt-body.move .place{font-weight:400;font-family:"Noto Sans TC";font-size:.88rem;color:var(--sumi-soft)}
+.tt-body .cost{font-family:"DM Mono",monospace;font-size:.68rem;color:var(--muted);margin-left:.4rem}
+.tt-body .note{font-size:.83rem;color:var(--sumi-soft);margin-top:.12rem}
+.mini{font-family:"DM Mono",monospace;font-size:.6rem;letter-spacing:.04em;padding:.08rem .4rem;border-radius:3px;vertical-align:middle;margin-left:.35rem}
+.mini.resv{background:var(--ochre-soft);color:var(--ochre);border:1px solid var(--ochre)}
+.mini.fix{background:var(--ai);color:#fff} .mini.free{background:var(--moss);color:#fff}
+
+.meals{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.4rem 0 .2rem}
+@media(max-width:560px){.meals{grid-template-columns:1fr}}
+.meal{border:1px solid var(--line);border-radius:5px;padding:.6rem .8rem;background:var(--washi)}
+.meal .lbl{font-family:"DM Mono",monospace;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.15rem}
+.meal .val{font-family:"Noto Serif TC",serif;font-weight:700;font-size:.98rem}
+.meal .val small{font-family:"Noto Sans TC";font-weight:400;font-size:.78rem;color:var(--sumi-soft)}
+.meal.blank{background:repeating-linear-gradient(135deg,var(--ochre-soft),var(--ochre-soft) 10px,#efe0bf 10px,#efe0bf 20px);border:1px dashed var(--ochre)}
+.meal.blank .lbl{color:var(--ochre)}
+.meal.blank .val{color:var(--ochre);font-weight:500;font-family:"Noto Sans TC";font-size:.9rem}
+.meal.blank .fillin{display:inline-block;min-width:8rem;border-bottom:1.5px dotted var(--ochre);height:1.1em;vertical-align:bottom}
+
+.flag{margin:.4rem 0 .2rem;border-left:3px solid var(--ochre);background:var(--ochre-soft);padding:.6rem .9rem;border-radius:0 4px 4px 0;font-size:.85rem}
+.flag.fixed{border-left-color:var(--moss);background:#e4e8dc}
+
+.state{padding:2rem 0;font-family:"DM Mono",monospace;font-size:.85rem;color:var(--muted)}
+.state.err{color:#b0392b}
+
+footer{padding:2.4rem 0 3.5rem;font-family:"DM Mono",monospace;font-size:.72rem;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+
+@media(max-width:560px){.tt-row{grid-template-columns:66px 18px 1fr}.day-tags{width:100%;margin-left:0}}
+@media(prefers-reduced-motion:no-preference){.day{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}.reveal-in{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+
+<nav><div class="inner">
+  <span class="brand">神戶・京都 ⁄ 9日8夜</span>
+  <a href="#d1">1</a><a href="#d2">2</a><a href="#d3">3</a><a href="#d4">4</a><a href="#d5">5</a><a href="#d6">6</a><a href="#d7">7</a><a href="#d8">8</a><a href="#d9">9</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">2026.09.27 — 10.05 ／ Solo Trip</div>
+  <h1>神戶・京都<span class="sub">工藝・古剎・山林・門跡 ─ 一人深度慢旅</span></h1>
+  <div class="route-line"><b>神戶機場 IN</b><span class="arw">──</span>三宮<span class="arw">──</span>姫路<span class="arw">──</span>大阪（還願）<span class="arw">──</span>京都<span class="arw">──</span><b>關西機場 OUT</b></div>
+  <div class="facts">
+    <div class="fact"><div class="k">Duration</div><div class="v">9 天 8 夜</div></div>
+    <div class="fact"><div class="k">去程</div><div class="v">JX1834 <small>08:15→11:45 神戶</small></div></div>
+    <div class="fact"><div class="k">回程</div><div class="v">JX823 <small>15:10→17:05 台北</small></div></div>
+    <div class="fact"><div class="k">神戶 3 晚</div><div class="v">東橫INN <small>三宮站</small></div></div>
+    <div class="fact"><div class="k">京都 5 晚</div><div class="v">東橫INN <small>五條大宮</small></div></div>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <div class="sec-head"><span class="no">/ 01</span><h2>每日行程</h2></div>
+  <p class="lead">資料由 Google Sheet 同步。<span class="mini fix">班次</span> 固定時刻　<span class="mini resv">預約</span> 需事前預約　<span class="mini free">免費</span>。晚餐留白欄位以斜紋標示。</p>
+  <div id="days"><div class="state" id="state">讀取行程資料中…</div></div>
+</div></section>
+
+<footer><div class="wrap">
+  <span>神戶・京都 9日8夜 ／ 行程手帖</span>
+  <span>資料來源：Google Sheet ・ 票價與營運資訊出發前請再確認</span>
+</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
