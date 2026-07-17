@@ -9,6 +9,7 @@
    ============================================================ */
 const META_CSV_URL     = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3vflXzFsxsdLDzObMSTt86Ci-nan0KjZjtnGa4QYDLPhD-8OJqg9DyzpH3KbzwQQucBXA7D2p9RMS/pub?gid=0&single=true&output=csv";
 const SCHEDULE_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3vflXzFsxsdLDzObMSTt86Ci-nan0KjZjtnGa4QYDLPhD-8OJqg9DyzpH3KbzwQQucBXA7D2p9RMS/pub?gid=469937186&single=true&output=csv";
+const SITE_CSV_URL     = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3vflXzFsxsdLDzObMSTt86Ci-nan0KjZjtnGa4QYDLPhD-8OJqg9DyzpH3KbzwQQucBXA7D2p9RMS/pub?gid=49395692&single=true&output=csv";
 
 /* ---------- 小工具 ---------- */
 const esc = s => (s == null ? "" : String(s)).replace(/[&<>"]/g, c =>
@@ -100,12 +101,42 @@ function dayCard(meta, items) {
   </div>`;
 }
 
+function renderHero(rows) {
+  const m = {};
+  rows.forEach(r => { if (r.key) m[r.key] = r.value; });
+
+  const route = (m.route || "").split("|").map(s => s.trim()).filter(Boolean);
+  const routeHtml = route.map((seg, i) => {
+    const b = (i === 0 || i === route.length - 1) ? `<b>${esc(seg)}</b>` : esc(seg);
+    const arw = i < route.length - 1 ? `<span class="arw">──</span>` : "";
+    return b + arw;
+  }).join("");
+
+  let facts = "";
+  for (let i = 1; i <= 8; i++) {
+    const k = m["fact" + i + "_k"], v = m["fact" + i + "_v"];
+    if (!k && !v) continue;
+    const parts = (v || "").split("|");
+    const main = esc(parts[0] || "");
+    const small = parts[1] ? ` <small>${esc(parts[1])}</small>` : "";
+    facts += `<div class="fact"><div class="k">${esc(k)}</div><div class="v">${main}${small}</div></div>`;
+  }
+
+  document.getElementById("hero").innerHTML = `
+    <div class="eyebrow">${esc(m.eyebrow)}</div>
+    <h1>${esc(m.title)}<span class="sub">${esc(m.subtitle)}</span></h1>
+    <div class="route-line">${routeHtml}</div>
+    <div class="facts">${facts}</div>`;
+}
+
 /* ---------- 主流程 ---------- */
 async function init() {
   const host = document.getElementById("days");
   try {
-    const [meta, sched] = await Promise.all([loadCSV(META_CSV_URL), loadCSV(SCHEDULE_CSV_URL)]);
-
+    const [site, meta, sched] = await Promise.all([
+     loadCSV(SITE_CSV_URL), loadCSV(META_CSV_URL), loadCSV(SCHEDULE_CSV_URL)
+   ]);
+   renderHero(site);
     // 依 day 分組 schedule，並依 seq 排序
     const byDay = {};
     sched.forEach(it => {
