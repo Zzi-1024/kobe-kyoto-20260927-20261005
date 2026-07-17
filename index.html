@@ -44,7 +44,7 @@ section{padding:3.2rem 0;border-bottom:1px solid var(--line)}
 .sec-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.6rem}
 .sec-head .no{font-family:"DM Mono",monospace;font-size:.8rem;color:var(--moss);letter-spacing:.1em}
 .sec-head h2{font-family:"Noto Serif TC",serif;font-weight:700;font-size:1.6rem;letter-spacing:.03em}
-.lead{max-width:80ch;color:var(--sumi-soft);margin-bottom:1.4rem;font-size:.95rem}
+.lead{max-width:150ch;color:var(--sumi-soft);margin-bottom:1.4rem;font-size:.95rem}
 
 .day{padding-top:2.8rem}
 .day:first-of-type{padding-top:0}
@@ -124,8 +124,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
 
 <section><div class="wrap">
   <div class="sec-head"><span class="no">/ 01</span><h2>每日行程</h2></div>
-  <p class="lead">資料從Google表單同步。<span class="mini fix">班次</span> 固定時刻　<span class="mini resv">預約</span> 需事前預約　<span class="mini free"> 免費 </span> 無須額外費用 </p>
-  <p>晚餐留白欄位以斜紋標示</p>
+  <p class="lead">資料從Google表單同步。<span class="mini fix">班次</span> 固定時刻　<span class="mini resv">預約</span> 需事前預約　<span class="mini free"> 免費 </span> 無須額外費用 。晚餐留白欄位以斜紋標示</p>
   <div id="days"><div class="state" id="state">讀取行程資料中…</div></div>
 </div></section>
 
@@ -142,9 +141,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
   <p class="lead">下表直接嵌入 Google Sheet，可即時檢視；登入且有編輯權時，點右上角可切換到試算表修改。</p>
   <div class="embed-wrap">
     <iframe id="cost-embed" title="費用估算" loading="lazy"
-      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR3vflXzFsxsdLDzObMSTt86Ci-nan0KjZjtnGa4QYDLPhD-8OJqg9DyzpH3KbzwQQucBXA7D2p9RMS/pubhtml?gid=2094658140&single=true"></iframe>
+      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR3vflXzFsxsdLDzObMSTt86Ci-nan0KjZjtnGa4QYDLPhD-8OJqg9DyzpH3KbzwQQucBXA7D2p9RMS/pubhtml?gid=2094658140&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
     <a class="embed-edit" target="_blank" rel="noopener"
-      href="貼上試算表的 edit 網址（可加 #gid=costs的gid）">在 Google Sheet 編輯 ↗</a>
+      href="https://docs.google.com/spreadsheets/d/12CES6yCyx6NC2_wbkE1wQzTZnRj9bVijkxOarPYkRso/edit?gid=49395692#gid=49395692">在 Google Sheet 編輯 ↗</a>
   </div>
 </div></section>
 
