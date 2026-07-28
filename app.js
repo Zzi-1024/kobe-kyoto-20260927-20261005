@@ -165,15 +165,32 @@ function renderResv(rows) {
   });
 }
 
-/* ---------- 主流程 ---------- */
-async function init() {
+/* ---------- 主流程 ----------
+   各分頁獨立載入：任一分頁失敗只影響自己的區塊，其餘照常渲染。
+*/
+function init() {
+  // Hero（site 分頁）
+  loadCSV(SITE_CSV_URL)
+    .then(renderHero)
+    .catch(e => console.error("site 分頁載入失敗：", e));
+
+  // 預訂清單（reservations 分頁）
+  loadCSV(RESV_CSV_URL)
+    .then(renderResv)
+    .catch(e => {
+      const h = document.getElementById("resv");
+      if (h) h.innerHTML = `<div class="state err">預訂清單讀取失敗：請確認 reservations 分頁已發布、且 RESV_CSV_URL 正確。</div>`;
+    });
+
+  // 每日行程（meta ＋ schedule 分頁，兩者需一起才能組出卡片）
+  renderDays();
+}
+
+async function renderDays() {
   const host = document.getElementById("days");
   try {
-    const [site, meta, sched, resv] = await Promise.all([
-       loadCSV(SITE_CSV_URL), loadCSV(META_CSV_URL), loadCSV(SCHEDULE_CSV_URL), loadCSV(RESV_CSV_URL)
-    ]);
-    renderHero(site);
-    renderResv(resv);
+    const [meta, sched] = await Promise.all([loadCSV(META_CSV_URL), loadCSV(SCHEDULE_CSV_URL)]);
+
     // 依 day 分組 schedule，並依 seq 排序
     const byDay = {};
     sched.forEach(it => {
@@ -190,10 +207,10 @@ async function init() {
       .map(m => dayCard(m, byDay[String(m.day).trim()] || []))
       .join("");
 
-    host.innerHTML = html || `<div class="state err">沒有讀到任何行程資料，請確認分頁與發布設定。</div>`;
+    host.innerHTML = html || `<div class="state err">沒有讀到任何行程資料，請確認 meta／schedule 分頁與發布設定。</div>`;
     reveal();
   } catch (e) {
-    host.innerHTML = `<div class="state err">讀取失敗：請確認 app.js 裡的兩個 CSV 網址已填、且分頁已「發布到網路」。<br>${esc(e && e.message || e)}</div>`;
+    host.innerHTML = `<div class="state err">行程讀取失敗：請確認 meta／schedule 兩個 CSV 網址已填、且分頁已「發布到網路」。<br>${esc(e && e.message || e)}</div>`;
   }
 }
 
